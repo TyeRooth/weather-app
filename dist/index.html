@@ -8,12 +8,95 @@
     <script src="main.js" defer="defer"></script>
 </head>
 <body>
-    <form action="">
-        <input class="location-input" type="text">
-        <button>
-            submit
-        </button>
-    </form>
-    <div class="error"></div>
+    <div id="search-section">
+        <form action="">
+            <input class="location-input" type="text">
+            <button id="search-button"></button>
+        </form>
+        <div class="error"></div>
+    </div>
+    <div id="current-weather-section">
+        <div class="current-section">
+            <div id="location-current"></div>
+            <div id="temperature-current"></div>
+        </div>
+        <div class="current-section">
+            <img src="" alt="Weather GIF" id="weather-gif">
+            <div id="description-current"></div>
+        </div>
+        <div id="current-section">
+            <div class="current-item">
+                <img src="./icons/thermometer.svg" alt="Feels Like">
+                <div class="column">
+                    <div class="current-label">Feels Like</div>
+                    <div id="feels-like"></div>
+                </div>
+            </div>
+            <div class="current-item">
+                <img src="./icons/droplet.svg" alt="Humidity">
+                <div class="column">
+                    <div class="current-label">Humidity</div>
+                    <div id="humidity"></div>
+                </div>
+            </div>
+            <div class="current-item">
+                <img src="./icons/wind.svg" alt="Wind Speed">
+                <div class="column">
+                    <div class="current-label">Wind Speed</div>
+                    <div id="wind-speed"></div>
+                </div>
+            </div>    
+        </div>    
+    </div>
+    <div id="forecast-section">
+        <div class="forecast-day">
+            <div class="weekday"></div>
+            <div class="temp-max"></div>
+            <div class="temp-min"></div>
+            <img src="" alt="" class="forecast-icon">
+        </div>
+        <div class="forecast-day">
+            <div class="weekday"></div>
+            <div class="temp-max"></div>
+            <div class="temp-min"></div>
+            <img src="" alt="" class="forecast-icon">
+        </div>
+        <div class="forecast-day">
+            <div class="weekday"></div>
+            <div class="temp-max"></div>
+            <div class="temp-min"></div>
+            <img src="" alt="" class="forecast-icon">
+        </div>
+        <div class="forecast-day">
+            <div class="weekday"></div>
+            <div class="temp-max"></div>
+            <div class="temp-min"></div>
+            <img src="" alt="" class="forecast-icon">
+        </div>
+        <div class="forecast-day">
+            <div class="weekday"></div>
+            <div class="temp-max"></div>
+            <div class="temp-min"></div>
+            <img src="" alt="" class="forecast-icon">
+        </div>
+        <div class="forecast-day">
+            <div class="weekday"></div>
+            <div class="temp-max"></div>
+            <div class="temp-min"></div>
+            <img src="" alt="" class="forecast-icon">
+        </div>
+        <div class="forecast-day">
+            <div class="weekday"></div>
+            <div class="temp-max"></div>
+            <div class="temp-min"></div>
+            <img src="" alt="" class="forecast-icon">
+        </div>
+        <div class="forecast-day">
+            <div class="weekday"></div>
+            <div class="temp-max"></div>
+            <div class="temp-min"></div>
+            <img src="" alt="" class="forecast-icon">
+        </div>
+    </div>
 </body>
 </html>
