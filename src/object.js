@@ -2,7 +2,6 @@ import { currentDOM } from "./DOM";
 import { location } from ".";
 
 function objectifyWeather (data) {
-    console.log(data);
     const weather = {
         current: objectifyCurrent(data.current),
         daily: objectifyDaily(data.daily),
@@ -53,7 +52,5 @@ function objectifyHourly(data) {
     }
     return hourlyForecast;    
 }
-
-
 
 export {objectifyWeather};

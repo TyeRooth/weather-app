@@ -1,5 +1,6 @@
 import {objectifyWeather} from './object';
-import {currentDOM} from './DOM';
+import {currentDOM, dailyDOM} from './DOM';
+import {forecastSwitch} from './buttons';
 
 function getWeather (location) {
     const cityCoords = fetch(`http://api.openweathermap.org/data/2.5/weather?q=${ location }&APPID=b55e6cb5acc75418c397aa9d4a22b7db`, {mode:'cors'})
@@ -22,7 +23,9 @@ function getWeather (location) {
             })
             .then(function(response) {
                 const weather = objectifyWeather(response);
+                dailyDOM(weather.daily);
                 getGIF(weather.current.description)
+                forecastSwitch(weather);
             })
             .catch(err => {
                 const error = document.querySelector('.error');
@@ -64,4 +67,4 @@ function getGIF (description) {
         })
 }
 
-export {getCurrentWeather, getWeather};
+export {getWeather};

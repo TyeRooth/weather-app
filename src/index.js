@@ -1,5 +1,5 @@
 import './style.css';
-import {getCurrentWeather, getWeather} from './APIcalls';
+import {getWeather} from './APIcalls';
 
 let location = 'Toronto';
 
@@ -11,10 +11,9 @@ function locationSubmit () {
     form.addEventListener('submit', (e) => {
         e.preventDefault();
         location = input.value;
-        getCurrentWeather(input.value);
+        getWeather(input.value);
     });
 }
-
 locationSubmit();
 
 export {location};

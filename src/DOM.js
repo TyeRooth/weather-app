@@ -12,4 +12,29 @@ function addText (id, property) {
     node.textContent = property;
 }
 
-export {currentDOM};
+function dailyDOM (object) {
+    for(let i = 0; i < 8; i++) {
+        const dayDiv = document.querySelector(`[data-index="${ i }"]`);
+        const maxTemp = dayDiv.querySelector('.temp-max');
+        maxTemp.textContent = object[i].tempMax;
+        const minTemp = dayDiv.querySelector('.temp-min');
+        minTemp.textContent = object[i].tempMin;
+        const icon = dayDiv.querySelector('.forecast-icon');
+        icon.setAttribute('src', './icons/cloud.svg');    
+    }
+}
+
+function hourlyDOM (object) {
+    for(let i = 0; i < 8; i++) {
+        const hourlyDiv = document.querySelector(`[data-index="${ i }"]`);
+        const temp = hourlyDiv.querySelector('.temp-max');
+        temp.textContent = object[i].temp;
+        // Need to blank out min temp space from daily forecast
+        const minTemp = hourlyDiv.querySelector('.temp-min');
+        minTemp.textContent = "";
+        const icon = hourlyDiv.querySelector('.forecast-icon');
+        icon.setAttribute('src', './icons/cloud.svg');
+    }
+}
+
+export {currentDOM, dailyDOM, hourlyDOM};

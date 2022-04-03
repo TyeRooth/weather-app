@@ -86,4 +86,6 @@ form button:hover {
 
 #forecast-section {
     border: 1px solid white;
+    display: flex;
+    gap: 20px;
 }
