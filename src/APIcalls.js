@@ -1,8 +1,8 @@
 import {objectifyWeather} from './object';
 import {currentDOM, dailyDOM} from './DOM';
-import {forecastSwitch} from './buttons';
+import {forecastSwitch} from './utilities';
 
-function getWeather (location) {
+function getWeather (location, units) {
     const cityCoords = fetch(`http://api.openweathermap.org/data/2.5/weather?q=${ location }&APPID=b55e6cb5acc75418c397aa9d4a22b7db`, {mode:'cors'})
         .then(function(response) {
             return response.json();
@@ -17,11 +17,12 @@ function getWeather (location) {
         
         })
     cityCoords.then(coord => {
-        fetch(`https://api.openweathermap.org/data/2.5/onecall?lat=${ coord[1] }&lon=${ coord[0] }&appid=b55e6cb5acc75418c397aa9d4a22b7db`, {mode:'cors'})
+        fetch(`https://api.openweathermap.org/data/2.5/onecall?lat=${ coord[1] }&lon=${ coord[0] }&units=${ units }&appid=b55e6cb5acc75418c397aa9d4a22b7db`, {mode:'cors'})
             .then(function(response) {
                 return response.json();
             })
             .then(function(response) {
+                console.log(response);
                 const weather = objectifyWeather(response);
                 dailyDOM(weather.daily);
                 getGIF(weather.current.description)

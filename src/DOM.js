@@ -1,3 +1,5 @@
+import { unixToDay, unixToHours } from "./utilities";
+
 function currentDOM (object) {
     addText('location-current', object.location);
     addText('temperature-current', object.temperature);
@@ -15,6 +17,13 @@ function addText (id, property) {
 function dailyDOM (object) {
     for(let i = 0; i < 8; i++) {
         const dayDiv = document.querySelector(`[data-index="${ i }"]`);
+        const weekday = dayDiv.querySelector('.weekday');
+        if(i === 0) {
+            weekday.textContent = "Today";
+        }
+        else {
+            weekday.textContent = unixToDay(object[i].time);
+        }
         const maxTemp = dayDiv.querySelector('.temp-max');
         maxTemp.textContent = object[i].tempMax;
         const minTemp = dayDiv.querySelector('.temp-min');
@@ -27,6 +36,9 @@ function dailyDOM (object) {
 function hourlyDOM (object) {
     for(let i = 0; i < 8; i++) {
         const hourlyDiv = document.querySelector(`[data-index="${ i }"]`);
+        const time = hourlyDiv.querySelector('.weekday');
+        const localTime = unixToHours(object[i].time, object[i].offset);
+        time.textContent = localTime;
         const temp = hourlyDiv.querySelector('.temp-max');
         temp.textContent = object[i].temp;
         // Need to blank out min temp space from daily forecast

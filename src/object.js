@@ -5,7 +5,7 @@ function objectifyWeather (data) {
     const weather = {
         current: objectifyCurrent(data.current),
         daily: objectifyDaily(data.daily),
-        hourly: objectifyHourly(data.hourly)
+        hourly: objectifyHourly(data)
     }
     console.log(weather);
     return weather;
@@ -44,9 +44,10 @@ function objectifyHourly(data) {
     let hourlyForecast = [];
     for(let i = 1; i < 25; i++) {
         const hourlyWeather = {
-            time: data[i].dt,
-            temp: data[i].temp,
-            weather: data[i].weather[0].main
+            time: data.hourly[i].dt,
+            temp: data.hourly[i].temp,
+            weather: data.hourly[i].weather[0].main,
+            offset: data.timezone_offset
         }
         hourlyForecast.push(hourlyWeather);
     }
