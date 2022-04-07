@@ -1,15 +1,28 @@
 import { format } from "date-fns";
-import {dailyDOM, hourlyDOM} from "./DOM";
+import {dailyDOM, hourlyDOM, addDegrees} from "./DOM";
 
-function forecastSwitch (object) {
+function forecastSwitch (object, units) {
     const dailyBtn = document.getElementById('daily');
     dailyBtn.addEventListener('click', () => {
         dailyDOM(object.daily);
+        addDegrees(units);
+        if(!dailyBtn.classList.contains('active')) {
+            switchActive();
+        }
     });
     const hourlyBtn = document.querySelector('#hourly');
     hourlyBtn.addEventListener('click', () => {
         hourlyDOM(object.hourly);
+        addDegrees(units);
+        if(!hourlyBtn.classList.contains('active')) {
+            switchActive()
+        }
     })
+
+    function switchActive () {
+        dailyBtn.classList.toggle('active');
+        hourlyBtn.classList.toggle('active');
+    }
 }
 
 function unixToDay (unix) {

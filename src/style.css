@@ -2,6 +2,7 @@ body {
     display: flex;
     background-color: rgb(0, 153, 255);
     flex-direction: column;
+    min-height: 90vh;
 }
 
 :root {
@@ -9,12 +10,11 @@ body {
 }
 
 #search-section {
-    border: 1px solid white;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    padding-top: 30px;
+    padding-top: 6vh;
     gap: 15px;
 }
 
@@ -51,31 +51,53 @@ form button:hover {
 }
 
 #current-weather-section {
-    border: 1px solid white;
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
-    align-items: center;
     justify-items: center;
     justify-content: space-around;
     color: white;
-    max-height: max-content;
+    flex: 1;
+    padding-top: 6vh;
+    padding-bottom: 12vh;
 }
 
 .current-section {
     display: flex;
     flex-direction: column;
-    width: 200px;
-    gap: 20px;
+    gap: 30px;
     align-items: center;
+    width:max-content;
+}
+
+#location-current {
+    font-size: 3rem;
+}
+
+#temperature-current {
+    font-size: 4rem;
+    font-weight: bold;
+}
+
+#units:hover {
+    text-decoration: underline;
+}
+
+#description-current {
+    font-size: 2rem;
 }
 
 .current-item {
     display: flex;
     gap: 20px;
+    font-size: 2rem;
+}
+
+.current-label {
+    font-size: 1rem;
 }
 
 .current-item img {
-    height: 1.5rem;
+    height: 2rem;
     filter: invert(100);
 }
 
@@ -84,8 +106,52 @@ form button:hover {
     flex-direction: column;
 }
 
-#forecast-section {
+.choose-forecast {
+    padding-left: 80px;
+    display: flex;
+    gap: 40px;
+}
+
+.choose-forecast button.active {
     border: 1px solid white;
+    border-radius: 8%;
+}
+
+.choose-forecast button,
+#units {
+    border: none;
+    background-color:rgb(0, 153, 255);
+    color: white;
+    font-size: 1rem;
+}
+
+#forecast-section {
     display: flex;
     gap: 20px;
+    filter: invert(100);
+    justify-content: space-between;
+    padding: 20px 80px;
+}
+
+.forecast-day {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.weekday {
+    font-size: 1rem;
+}
+
+.temp-max {
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+.temp-min {
+    font-size: 1rem;
+}
+
+.forecast-icon {
+    height: 2rem;
 }

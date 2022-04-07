@@ -1,5 +1,5 @@
 import {objectifyWeather} from './object';
-import {currentDOM, dailyDOM} from './DOM';
+import {currentDOM, dailyDOM, addDegrees} from './DOM';
 import {forecastSwitch} from './utilities';
 
 function getWeather (location, units) {
@@ -26,7 +26,10 @@ function getWeather (location, units) {
                 const weather = objectifyWeather(response);
                 dailyDOM(weather.daily);
                 getGIF(weather.current.description)
-                forecastSwitch(weather);
+                forecastSwitch(weather, units);
+                addDegrees(units);
+                document.querySelector('#daily').classList.add('active')
+                document.querySelector('#hourly').classList.remove('active');
             })
             .catch(err => {
                 const error = document.querySelector('.error');
@@ -34,23 +37,6 @@ function getWeather (location, units) {
             
             })
     }); 
-};
-
-function getCurrentWeather (location) {
-    const test = fetch(`http://api.openweathermap.org/data/2.5/weather?q=${ location }&APPID=b55e6cb5acc75418c397aa9d4a22b7db`, {mode:'cors'})
-        .then(function(response) {
-            return response.json();
-        })
-        .then(function(response) {
-            const weather = objectifyWeather(response);
-            currentDOM(weather);
-            getGIF(weather.description);
-            return response;
-        })
-        .catch(err => {
-            const error = document.querySelector('.error');
-            error.textContent = "Location Not Found";
-        })       
 };
 
 function getGIF (description) {

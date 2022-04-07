@@ -15,12 +15,11 @@ function objectifyWeather (data) {
 function objectifyCurrent(data) {
     const currentWeather = {
         location: location,
-        temperature: data.temp,
-        feelsLike: data.feels_like,
+        temperature: Math.round(Number(data.temp)),
+        feelsLike: Math.round(Number(data.feels_like)),
         humidity: data.humidity,
         windSpeed: data.wind_speed,
         description: data.weather[0].description
-        // Add Icon object later
     }
     currentDOM(currentWeather);
     return currentWeather;
@@ -31,8 +30,8 @@ function objectifyDaily(data) {
     for(let i = 0; i < 8; i++) {
         const dailyWeather = {
             time: data[i].dt,
-            tempMax: data[i].temp.max,
-            tempMin: data[i].temp.min,
+            tempMax: Math.round(Number(data[i].temp.max)),
+            tempMin: Math.round(Number(data[i].temp.min)),
             weather: data[i].weather[0].main     
         }
         dailyForecast.push(dailyWeather);
@@ -45,7 +44,7 @@ function objectifyHourly(data) {
     for(let i = 1; i < 25; i++) {
         const hourlyWeather = {
             time: data.hourly[i].dt,
-            temp: data.hourly[i].temp,
+            temp: Math.round(Number(data.hourly[i].temp)),
             weather: data.hourly[i].weather[0].main,
             offset: data.timezone_offset
         }
