@@ -1,5 +1,5 @@
 import { format } from "date-fns";
-import {dailyDOM, hourlyDOM, addDegrees} from "./DOM";
+import {dailyDOM, hourlyDOM, addDegrees, hourlyNavDOM, removeHourlyNavDOM} from "./DOM";
 
 function forecastSwitch (object, units) {
     const dailyBtn = document.getElementById('daily');
@@ -9,13 +9,15 @@ function forecastSwitch (object, units) {
         if(!dailyBtn.classList.contains('active')) {
             switchActive();
         }
+        removeHourlyNavDOM();
     });
     const hourlyBtn = document.querySelector('#hourly');
     hourlyBtn.addEventListener('click', () => {
-        hourlyDOM(object.hourly);
+        hourlyDOM(object.hourly, 0);
         addDegrees(units);
         if(!hourlyBtn.classList.contains('active')) {
             switchActive()
+            addHourlyNavigation(object, units);
         }
     })
 
@@ -23,6 +25,52 @@ function forecastSwitch (object, units) {
         dailyBtn.classList.toggle('active');
         hourlyBtn.classList.toggle('active');
     }
+}
+
+function addHourlyNavigation (object, units) {
+    hourlyNavDOM();
+    console.log(units);
+    const hourChangeBtns = document.querySelectorAll('.change-hours');
+    hourChangeBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+            hourlyDOM(object.hourly, btn.getAttribute('data-group'));
+            addDegrees(units);
+            document.querySelector('.active-hours').classList.remove('active-hours');
+            btn.classList.add('active-hours');
+        })
+    })
+    const hourLeftBtn = document.getElementById('left-nav');
+    hourLeftBtn.addEventListener('click', () => {
+        hourlyDOM(object.hourly, getActiveHours('left'));
+        addDegrees(units);
+    })
+    const hourRightBtn = document.getElementById('right-nav');
+    hourRightBtn.addEventListener('click', () => {
+        hourlyDOM(object.hourly, getActiveHours('right'));
+        addDegrees(units);
+    })
+}
+
+function getActiveHours (direction) {
+    const currentButton = document.querySelector('.active-hours');
+    currentButton.classList.remove('active-hours');
+    const currentGroup = currentButton.getAttribute('data-group');
+    let newGroup;
+    if (direction === 'left') {
+        newGroup = currentGroup - 1;
+    }
+    else if(direction === 'right') {
+        newGroup = Number(currentGroup) + 1;
+    }
+    if (newGroup < 0) {
+        newGroup = 2;
+    }
+    else if (newGroup > 2) {
+        newGroup = 0;
+    }
+    const newButton = document.querySelector(`[data-group="${ newGroup }"]`);
+    newButton.classList.add('active-hours');
+    return newGroup;
 }
 
 function unixToDay (unix) {

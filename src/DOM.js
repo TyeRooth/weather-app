@@ -35,9 +35,9 @@ function dailyDOM (object) {
     }
 }
 
-function hourlyDOM (object) {
-    for(let i = 0; i < 8; i++) {
-        const hourlyDiv = document.querySelector(`[data-index="${ i }"]`);
+function hourlyDOM (object, group) {
+    for(let i = 0 + 8 * group; i < 8 + 8 * group; i++) {
+        const hourlyDiv = document.querySelector(`[data-index="${ i - 8 * group }"]`);
         const time = hourlyDiv.querySelector('.weekday');
         const localTime = unixToHours(object[i].time, object[i].offset);
         time.textContent = localTime;
@@ -74,4 +74,48 @@ function addDegrees (units) {
 )
 }
 
-export {currentDOM, dailyDOM, hourlyDOM, addDegrees};
+function chooseForecastDOM () {
+    const parentNode = document.querySelector('.choose-forecast');
+    parentNode.textContent = "";
+    const dailyNode = document.createElement('button');
+    dailyNode.textContent = "Daily";
+    dailyNode.setAttribute('id', 'daily');
+    const hourlyNode = document.createElement('button');
+    hourlyNode.textContent = "Hourly";
+    hourlyNode.setAttribute('id', 'hourly');
+    parentNode.appendChild(dailyNode);
+    parentNode.appendChild(hourlyNode); 
+}
+
+function hourlyNavDOM () {
+    const forecastNav = document.querySelector('.choose-forecast');
+    const hourNav = document.createElement('div');
+    hourNav.setAttribute('id', 'hour-nav');
+    const hoursLeft = document.createElement('button');
+    hoursLeft.textContent = "<";
+    hoursLeft.setAttribute('id', 'left-nav');
+    hourNav.appendChild(hoursLeft);
+    for(let i = 0; i < 3; i++) {
+        const hourGroup = document.createElement('button');
+        hourGroup.classList.add('change-hours');
+        hourGroup.setAttribute('data-group', i);
+        if (i === 0) {
+            hourGroup.classList.add('active-hours');
+        }
+        hourNav.appendChild(hourGroup);
+    }
+    const hoursRight = document.createElement('button');
+    hoursRight.textContent = ">";
+    hoursRight.setAttribute('id', 'right-nav');
+    hourNav.appendChild(hoursRight);
+    forecastNav.appendChild(hourNav);
+}
+
+function removeHourlyNavDOM () {
+    if (document.getElementById('hour-nav')) {
+        const forecastNav = document.querySelector('.choose-forecast');
+        forecastNav.removeChild(document.getElementById('hour-nav'));
+    }
+}
+
+export {currentDOM, dailyDOM, hourlyDOM, addDegrees, chooseForecastDOM, hourlyNavDOM, removeHourlyNavDOM};

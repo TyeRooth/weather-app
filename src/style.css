@@ -117,6 +117,25 @@ form button:hover {
     border-radius: 8%;
 }
 
+#hour-nav {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    font-size: 1rem;
+}
+
+.choose-forecast button.change-hours {
+    border: 1px solid white;
+    height: 0.7rem;
+    width: 0.7rem;
+    border-radius: 50%;
+    display: inline-block;
+}
+
+.choose-forecast button.active-hours {
+    background-color: white;
+}
+
 .choose-forecast button,
 #units {
     border: none;

@@ -1,5 +1,5 @@
 import {objectifyWeather} from './object';
-import {currentDOM, dailyDOM, addDegrees} from './DOM';
+import {currentDOM, dailyDOM, addDegrees, removeHourlyNavDOM, chooseForecastDOM} from './DOM';
 import {forecastSwitch} from './utilities';
 
 function getWeather (location, units) {
@@ -24,6 +24,7 @@ function getWeather (location, units) {
             .then(function(response) {
                 console.log(response);
                 const weather = objectifyWeather(response);
+                chooseForecastDOM();
                 dailyDOM(weather.daily);
                 getGIF(weather.current.description)
                 forecastSwitch(weather, units);
