@@ -1,5 +1,6 @@
 import { currentDOM } from "./DOM";
 import { location } from ".";
+import {formatString} from './utilities';
 
 function objectifyWeather (data) {
     const weather = {
@@ -14,12 +15,12 @@ function objectifyWeather (data) {
 
 function objectifyCurrent(data) {
     const currentWeather = {
-        location: location,
+        location: formatString(location),
         temperature: Math.round(Number(data.temp)),
         feelsLike: Math.round(Number(data.feels_like)),
         humidity: data.humidity,
-        windSpeed: data.wind_speed,
-        description: data.weather[0].description
+        windSpeed: Math.round(data.wind_speed),
+        description: formatString(data.weather[0].description)
     }
     currentDOM(currentWeather);
     return currentWeather;

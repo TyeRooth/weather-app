@@ -13,7 +13,7 @@ function getWeather (location, units) {
         })
         .catch(err => {
             const error = document.querySelector('.error');
-            error.textContent = "Location Not Found";        
+            error.textContent = "Location Not Found: Search must be in the form of \"City\", \"City, State\" or \"City, Country\".";        
         
         })
     cityCoords.then(coord => {
@@ -31,10 +31,12 @@ function getWeather (location, units) {
                 addDegrees(units);
                 document.querySelector('#daily').classList.add('active')
                 document.querySelector('#hourly').classList.remove('active');
+                document.querySelector('input').value = "";
+                document.querySelector('.error').textContent = "";
             })
             .catch(err => {
                 const error = document.querySelector('.error');
-                error.textContent = "Location Not Found";        
+                error.textContent = "Location Not Found: Search must be in the form of \"City\", \"City, State\" or \"City, Country\".";        
             
             })
     }); 

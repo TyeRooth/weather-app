@@ -1,4 +1,4 @@
-import { unixToDay, unixToHours } from "./utilities";
+import { unixToDay, unixToHours, iconSelector } from "./utilities";
 
 function currentDOM (object) {
     addText('location-current', object.location);
@@ -31,7 +31,7 @@ function dailyDOM (object) {
         minTemp.textContent = object[i].tempMin;
         minTemp.classList.add('temp');
         const icon = dayDiv.querySelector('.forecast-icon');
-        icon.setAttribute('src', './icons/cloud.svg');    
+        icon.setAttribute('src', iconSelector(object[i].weather));    
     }
 }
 
@@ -50,7 +50,8 @@ function hourlyDOM (object, group) {
         // Remove temperature class to avoid degrees being added to empty text
         minTemp.classList.remove('temp');
         const icon = hourlyDiv.querySelector('.forecast-icon');
-        icon.setAttribute('src', './icons/cloud.svg');
+        console.log(object[i].weather);
+        icon.setAttribute('src', iconSelector(object[i].weather));  
     }
 }
 
@@ -70,8 +71,22 @@ function addDegrees (units) {
             }
             else {temp.textContent = temp.textContent + "°F"}
         }
+    });
+    //Display wind speed units
+    const windSpeed = document.getElementById('wind-speed');
+    const windCheck = windSpeed.textContent.split('');
+    if (windCheck[windCheck.length - 1] !== "h") {
+        if (units === 'metric') {
+            windSpeed.textContent = windSpeed.textContent + ' km/h';
+        }
+        else {windSpeed.textContent = windSpeed.textContent + 'mph'};
     }
-)
+    //Display humidity percentage
+    const humidity = document.getElementById('humidity');
+    const humidityCheck = humidity.textContent.split('');
+    if(humidityCheck[humidityCheck.length - 1] !== "%") {
+            humidity.textContent = humidity.textContent + '%';
+    }
 }
 
 function chooseForecastDOM () {

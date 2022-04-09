@@ -29,7 +29,6 @@ function forecastSwitch (object, units) {
 
 function addHourlyNavigation (object, units) {
     hourlyNavDOM();
-    console.log(units);
     const hourChangeBtns = document.querySelectorAll('.change-hours');
     hourChangeBtns.forEach(btn => {
         btn.addEventListener('click', () => {
@@ -88,4 +87,22 @@ function unixToHours (unix, offset) {
     return hour;
 }
 
-export {forecastSwitch, unixToDay, unixToHours};
+function iconSelector (weather) {
+    if (weather === 'Rain') {
+        return './icons/cloud-rain.svg';
+    }
+    else if (weather === 'Snow') {
+        return './icons/cloud-snow.svg';
+    }
+    else if (weather === 'Clear') {
+        return './icons/sun.svg';
+    }
+    else {return './icons/cloud.svg'};
+}
+
+function formatString (string) {
+    const lowered = string.toLowerCase();
+    return lowered.charAt(0).toUpperCase() + lowered.slice(1);
+}
+
+export {forecastSwitch, unixToDay, unixToHours, iconSelector, formatString};
