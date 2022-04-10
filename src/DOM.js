@@ -50,7 +50,6 @@ function hourlyDOM (object, group) {
         // Remove temperature class to avoid degrees being added to empty text
         minTemp.classList.remove('temp');
         const icon = hourlyDiv.querySelector('.forecast-icon');
-        console.log(object[i].weather);
         icon.setAttribute('src', iconSelector(object[i].weather));  
     }
 }
