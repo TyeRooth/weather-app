@@ -3,7 +3,7 @@ import {currentDOM, dailyDOM, addDegrees, removeHourlyNavDOM, chooseForecastDOM}
 import {forecastSwitch} from './utilities';
 
 function getWeather (location, units) {
-    const cityCoords = fetch(`http://api.openweathermap.org/data/2.5/weather?q=${ location }&APPID=b55e6cb5acc75418c397aa9d4a22b7db`, {mode:'cors'})
+    const cityCoords = fetch(`https://api.openweathermap.org/data/2.5/weather?q=${ location }&APPID=b55e6cb5acc75418c397aa9d4a22b7db`, {mode:'cors'})
         .then(function(response) {
             return response.json();
         })
