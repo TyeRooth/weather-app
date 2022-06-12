@@ -10,3 +10,5 @@ Asynchronous functions are going to be important when calling the information fr
 Details about the weather will be captured as object.  There is a good chance I may create separate objects for the current weather and the forecasted weather because of differences in the details shown.  These object can be created by finding the correct information in the API calls and assigning it to one of the object properties.
 
 Adding DOM elements, object assignment, and API calls can have their own separate modules.  The only other thing I can imagine having its own module is the error handling system.
+
+Github pages version of project is currently not working since it is not calling the main.js file.  To view project, it must be cloned into a local repository.
